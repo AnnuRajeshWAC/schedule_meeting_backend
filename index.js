@@ -36,6 +36,13 @@ app.get('/designations',async(req,res)=>{
         res.json({success:false})
     }
 })
+
+const holidays=mongoose.connection.collection('holidays')
+app.get('/holidays',async(req,res)=>{
+    const holidaysData=await holidays.find().toArray()
+    res.json({data:holidaysData,success:true}) 
+})
+
 app.post('/meeting',async(req,res)=>{
     try {
         const {title,email,lead,members,room,start,end,date}=req.body
